@@ -1,0 +1,51 @@
+import math
+
+def parse_pdb(file_path):
+    protein_atoms = []
+    ligand_atoms = []
+
+    with open(file_path, 'r') as pdb_file:
+        for line in pdb_file:
+            if line.startswith("ATOM"):
+                atom_type = line[12:16].strip()
+                x = float(line[30:38])
+                y = float(line[38:46])
+                z = float(line[46:54])
+
+                protein_atoms.append((atom_type, x, y, z))
+
+            elif line.startswith("HETATM"):
+                atom_type = line[12:16].strip()
+                x = float(line[30:38])
+                y = float(line[38:46])
+                z = float(line[46:54])
+
+                ligand_atoms.append((atom_type, x, y, z))
+
+    return protein_atoms, ligand_atoms
+
+def calculate_distances(protein_atoms, ligand_atoms):
+    distances = []
+
+    for protein_atom in protein_atoms:
+        for ligand_atom in ligand_atoms:
+            dist = math.sqrt((protein_atom[1] - ligand_atom[1])**2 +
+                             (protein_atom[2] - ligand_atom[2])**2 +
+                             (protein_atom[3] - ligand_atom[3])**2)
+            distances.append((protein_atom[0], ligand_atom[0], dist))
+
+    return distances
+
+def sort_distances(distances):
+    return sorted(distances, key=lambda x: x[2])
+
+
+pdb_file_path = 'your_pdb_file.pdb'
+
+protein_atoms, ligand_atoms = parse_pdb(pdb_file_path)
+distances = calculate_distances(protein_atoms, ligand_atoms)
+sorted_distances = sort_distances(distances)
+
+
+for protein_atom_type, ligand_atom_type, dist in sorted_distances:
+    print(f"Distance between {protein_atom_type} and {ligand_atom_type}: {dist}")
