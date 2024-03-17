@@ -18,8 +18,8 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QTransform)
 from PySide6.QtWidgets import (QApplication, QHBoxLayout, QLabel, QLineEdit,
     QMainWindow, QMenu, QMenuBar, QPushButton,
-    QScrollArea, QSizePolicy, QSpacerItem, QSplitter,
-    QStatusBar, QTabWidget, QVBoxLayout, QWidget)
+    QScrollArea, QSizePolicy, QSplitter, QStatusBar,
+    QTabWidget, QVBoxLayout, QWidget)
 
 class Ui_Main(object):
     def setupUi(self, Main):
@@ -146,12 +146,12 @@ class Ui_Main(object):
         self.tabWidget.setTabsClosable(True)
         self.tabWidget.setMovable(True)
         self.tabWidget.setTabBarAutoHide(False)
-        self.tab = QWidget()
-        self.tab.setObjectName(u"tab")
-        self.tabWidget.addTab(self.tab, "")
         self.tab_2 = QWidget()
         self.tab_2.setObjectName(u"tab_2")
         self.tabWidget.addTab(self.tab_2, "")
+        self.tab = QWidget()
+        self.tab.setObjectName(u"tab")
+        self.tabWidget.addTab(self.tab, "")
 
         self.verticalLayout.addWidget(self.tabWidget)
 
@@ -269,22 +269,19 @@ class Ui_Main(object):
         self.CodeView.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 119, 196))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 119, 219))
         self.CodeView.setWidget(self.scrollAreaWidgetContents)
 
         self.verticalLayout_3.addWidget(self.CodeView)
 
-        self.verticalSpacer = QSpacerItem(9, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Preferred)
-
-        self.verticalLayout_3.addItem(self.verticalSpacer)
-
         self.RawAnalysis = QScrollArea(self.layoutWidget1)
         self.RawAnalysis.setObjectName(u"RawAnalysis")
         self.RawAnalysis.setFont(font)
+        self.RawAnalysis.setAutoFillBackground(False)
         self.RawAnalysis.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 119, 195))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 119, 218))
         self.RawAnalysis.setWidget(self.scrollAreaWidgetContents_2)
 
         self.verticalLayout_3.addWidget(self.RawAnalysis)
@@ -334,7 +331,7 @@ class Ui_Main(object):
 
         self.retranslateUi(Main)
 
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(Main)
@@ -354,8 +351,8 @@ class Ui_Main(object):
         self.actioncsv.setText(QCoreApplication.translate("Main", u"csv", None))
         self.actionjson.setText(QCoreApplication.translate("Main", u"json", None))
         self.actionTheme.setText(QCoreApplication.translate("Main", u"Theme", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("Main", u"Tab 1", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("Main", u"Tab 2", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("Main", u"Tab 1", None))
         self.PathToTheFileLabel.setText(QCoreApplication.translate("Main", u"Path to the file", None))
         self.FileBrowser.setText(QCoreApplication.translate("Main", u"File browser", None))
         self.analizeButton.setText(QCoreApplication.translate("Main", u"Analize", None))
