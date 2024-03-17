@@ -401,7 +401,7 @@
                <enum>QTabWidget::Triangular</enum>
               </property>
               <property name="currentIndex">
-               <number>1</number>
+               <number>0</number>
               </property>
               <property name="documentMode">
                <bool>false</bool>
@@ -415,14 +415,14 @@
               <property name="tabBarAutoHide">
                <bool>false</bool>
               </property>
-              <widget class="QWidget" name="tab">
-               <attribute name="title">
-                <string>Tab 1</string>
-               </attribute>
-              </widget>
               <widget class="QWidget" name="tab_2">
                <attribute name="title">
                 <string>Tab 2</string>
+               </attribute>
+              </widget>
+              <widget class="QWidget" name="tab">
+               <attribute name="title">
+                <string>Tab 1</string>
                </attribute>
               </widget>
              </widget>
@@ -591,27 +591,11 @@
              <x>0</x>
              <y>0</y>
              <width>119</width>
-             <height>196</height>
+             <height>219</height>
             </rect>
            </property>
           </widget>
          </widget>
-        </item>
-        <item>
-         <spacer name="verticalSpacer">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Preferred</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>9</width>
-            <height>40</height>
-           </size>
-          </property>
-         </spacer>
         </item>
         <item>
          <widget class="QScrollArea" name="RawAnalysis">
@@ -619,6 +603,9 @@
            <font>
             <family>Cascadia Code</family>
            </font>
+          </property>
+          <property name="autoFillBackground">
+           <bool>false</bool>
           </property>
           <property name="widgetResizable">
            <bool>true</bool>
@@ -629,7 +616,7 @@
              <x>0</x>
              <y>0</y>
              <width>119</width>
-             <height>195</height>
+             <height>218</height>
             </rect>
            </property>
           </widget>
