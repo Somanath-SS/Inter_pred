@@ -142,7 +142,7 @@ class Ui_Main(object):
         font.setFamilies([u"Cascadia Mono ExtraLight"])
         self.tabWidget.setFont(font)
         self.tabWidget.setStyleSheet(u"   QTabWidget::tab-bar {\n"
-"           alignment: center;\n"
+"           alignment: left;\n"
 "        }\n"
 "        QTabBar::tab {\n"
 "            background-color: #rgb(240, 240, 240); \n"
@@ -157,7 +157,7 @@ class Ui_Main(object):
 "        }")
         self.tabWidget.setElideMode(Qt.ElideLeft)
         self.tabWidget.setDocumentMode(False)
-        self.tabWidget.setTabsClosable(True)
+        self.tabWidget.setTabsClosable(False)
         self.tabWidget.setMovable(True)
         self.tabWidget.setTabBarAutoHide(False)
         self.tab_2 = QWidget()
@@ -279,7 +279,7 @@ class Ui_Main(object):
         self.CodeView.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 98, 219))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 112, 219))
         self.CodeView.setWidget(self.scrollAreaWidgetContents)
 
         self.verticalLayout_3.addWidget(self.CodeView)
@@ -291,7 +291,7 @@ class Ui_Main(object):
         self.RawAnalysis.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 98, 218))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 112, 218))
         self.RawAnalysis.setWidget(self.scrollAreaWidgetContents_2)
 
         self.verticalLayout_3.addWidget(self.RawAnalysis)
@@ -341,7 +341,7 @@ class Ui_Main(object):
 
         self.retranslateUi(Main)
 
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(Main)

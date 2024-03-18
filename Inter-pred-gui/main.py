@@ -4,6 +4,8 @@ import sys
 from PySide6.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QLabel
 from PySide6.QtCore import Qt, QPoint 
 from draggable_window import DraggableWindow
+from title_window_functions import title_window_style
+from menu_functions import style_menu
 
 from ui_form import Ui_Main
 
@@ -12,28 +14,11 @@ class Main(QMainWindow):
         super().__init__(parent)
         self.ui = Ui_Main()
         self.ui.setupUi(self)
-                
-        self.setWindowFlags(Qt.FramelessWindowHint)
-
+        # set the style sheet main window theme
+        title_window_style(self)
         # menu bar 
         menu_bar = self.menuBar() 
-        
-        self.draggable_window = DraggableWindow(menu_bar)
-        # set the style sheet menu bar theme
-        menu_bar.setStyleSheet('''
-            QMenuBar {
-                background-color: #333; /* Dark Gray */
-                color: white;
-            }
-            QMenuBar::item {
-                background-color: #333; /* Dark Gray */
-                color: white;
-                padding: 4px 10px;
-            }
-            QMenuBar::item:selected {
-                background-color: #555; /* Dark Gray (Hovered) */
-            }
-        ''')
+        style_menu(menu_bar)
 
 
 if __name__ == "__main__":

@@ -399,7 +399,7 @@
               </property>
               <property name="styleSheet">
                <string notr="true">   QTabWidget::tab-bar {
-           alignment: center;
+           alignment: left;
         }
         QTabBar::tab {
             background-color: #rgb(240, 240, 240); 
@@ -414,7 +414,7 @@
         }</string>
               </property>
               <property name="currentIndex">
-               <number>0</number>
+               <number>1</number>
               </property>
               <property name="elideMode">
                <enum>Qt::ElideLeft</enum>
@@ -423,7 +423,7 @@
                <bool>false</bool>
               </property>
               <property name="tabsClosable">
-               <bool>true</bool>
+               <bool>false</bool>
               </property>
               <property name="movable">
                <bool>true</bool>
@@ -598,7 +598,7 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>98</width>
+             <width>112</width>
              <height>219</height>
             </rect>
            </property>
@@ -623,7 +623,7 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>98</width>
+             <width>112</width>
              <height>218</height>
             </rect>
            </property>
