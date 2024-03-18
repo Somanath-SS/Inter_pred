@@ -16,10 +16,10 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QIcon, QImage, QKeySequence, QLinearGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
-from PySide6.QtWidgets import (QApplication, QHBoxLayout, QLabel, QLineEdit,
-    QMainWindow, QMenu, QMenuBar, QPushButton,
-    QScrollArea, QSizePolicy, QSplitter, QStatusBar,
-    QTabWidget, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QHBoxLayout, QLineEdit, QMainWindow,
+    QMenu, QMenuBar, QPushButton, QScrollArea,
+    QSizePolicy, QSplitter, QStatusBar, QTabWidget,
+    QVBoxLayout, QWidget)
 
 class Ui_Main(object):
     def setupUi(self, Main):
@@ -139,9 +139,23 @@ class Ui_Main(object):
         self.tabWidget = QTabWidget(self.layoutWidget)
         self.tabWidget.setObjectName(u"tabWidget")
         font = QFont()
-        font.setFamilies([u"Cascadia Code"])
+        font.setFamilies([u"Cascadia Mono ExtraLight"])
         self.tabWidget.setFont(font)
-        self.tabWidget.setTabShape(QTabWidget.Triangular)
+        self.tabWidget.setStyleSheet(u"   QTabWidget::tab-bar {\n"
+"           alignment: center;\n"
+"        }\n"
+"        QTabBar::tab {\n"
+"            background-color: #rgb(240, 240, 240); \n"
+"            color: rgb(240, 240, 240);              \n"
+"            padding: 8px 20px;           \n"
+"            border-top-left-radius: 4px; \n"
+"            border-top-right-radius: 4px;\n"
+"            border: 1px solid white;\n"
+"        }\n"
+"        QTabBar::tab:selected {\n"
+"            color: rgb(0, 255, 0);              \n"
+"        }")
+        self.tabWidget.setElideMode(Qt.ElideLeft)
         self.tabWidget.setDocumentMode(False)
         self.tabWidget.setTabsClosable(True)
         self.tabWidget.setMovable(True)
@@ -160,35 +174,28 @@ class Ui_Main(object):
 
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.PathToTheFileLabel = QLabel(self.layoutWidget)
-        self.PathToTheFileLabel.setObjectName(u"PathToTheFileLabel")
-        font1 = QFont()
-        font1.setFamilies([u"Nirmala UI"])
-        font1.setPointSize(11)
-        font1.setBold(False)
-        self.PathToTheFileLabel.setFont(font1)
-
-        self.horizontalLayout.addWidget(self.PathToTheFileLabel)
-
         self.PathToTheFileLine = QLineEdit(self.layoutWidget)
         self.PathToTheFileLine.setObjectName(u"PathToTheFileLine")
-        self.PathToTheFileLine.setFont(font)
+        font1 = QFont()
+        font1.setFamilies([u"Cascadia Code"])
+        self.PathToTheFileLine.setFont(font1)
         self.PathToTheFileLine.setAutoFillBackground(False)
         self.PathToTheFileLine.setStyleSheet(u"        QLineEdit {\n"
 "            background-color:  rgb(30, 30, 30); /* Light Gray */\n"
-"            border: 2px solid #ccc; /* Light Gray */\n"
+"            border: 1px solid #ccc; /* Light Gray */\n"
 "            border-radius: 10px;\n"
 "            padding: 8px;\n"
 "            font-size: 11px;\n"
 "            color: rgb(0, 255, 0) /* Dark Gray */\n"
 "        }")
+        self.PathToTheFileLine.setReadOnly(True)
 
         self.horizontalLayout.addWidget(self.PathToTheFileLine)
 
         self.FileBrowser = QPushButton(self.layoutWidget)
         self.FileBrowser.setObjectName(u"FileBrowser")
         font2 = QFont()
-        font2.setFamilies([u"Nirmala UI"])
+        font2.setFamilies([u"Cascadia Code SemiBold"])
         font2.setBold(True)
         self.FileBrowser.setFont(font2)
         self.FileBrowser.setCursor(QCursor(Qt.ArrowCursor))
@@ -198,8 +205,8 @@ class Ui_Main(object):
 "            font-size: 14px;\n"
 "            margin: 4px 2px;\n"
 "            border-radius: 10px;\n"
-"            border: 2px solid white;\n"
-"            width: 100px;\n"
+"            border: 1px solid white;\n"
+"            width: 130px;\n"
 "            height: 30px\n"
 "\n"
 "        }\n"
@@ -218,7 +225,7 @@ class Ui_Main(object):
 "            font-size: 14px;\n"
 "            margin: 4px 2px;\n"
 "            border-radius: 10px;\n"
-"            border: 2px solid white;\n"
+"            border: 1px solid white;\n"
 "            width: 100px;\n"
 "            height: 30px\n"
 "\n"
@@ -231,7 +238,10 @@ class Ui_Main(object):
 
         self.errorButton = QPushButton(self.layoutWidget)
         self.errorButton.setObjectName(u"errorButton")
-        self.errorButton.setFont(font2)
+        font3 = QFont()
+        font3.setFamilies([u"Cascadia Mono SemiBold"])
+        font3.setBold(True)
+        self.errorButton.setFont(font3)
         self.errorButton.setAutoFillBackground(False)
         self.errorButton.setStyleSheet(u"        QPushButton {\n"
 "            background-color: #rgb(30, 30, 30);\n"
@@ -239,7 +249,7 @@ class Ui_Main(object):
 "            font-size: 14px;\n"
 "            margin: 4px 2px;\n"
 "            border-radius: 10px;\n"
-"            border: 2px solid white;\n"
+"            border: 1px solid white;\n"
 "            width: 100px;\n"
 "            height: 30px\n"
 "\n"
@@ -265,23 +275,23 @@ class Ui_Main(object):
         self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.CodeView = QScrollArea(self.layoutWidget1)
         self.CodeView.setObjectName(u"CodeView")
-        self.CodeView.setFont(font)
+        self.CodeView.setFont(font1)
         self.CodeView.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 119, 219))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 98, 219))
         self.CodeView.setWidget(self.scrollAreaWidgetContents)
 
         self.verticalLayout_3.addWidget(self.CodeView)
 
         self.RawAnalysis = QScrollArea(self.layoutWidget1)
         self.RawAnalysis.setObjectName(u"RawAnalysis")
-        self.RawAnalysis.setFont(font)
+        self.RawAnalysis.setFont(font1)
         self.RawAnalysis.setAutoFillBackground(False)
         self.RawAnalysis.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 119, 218))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 98, 218))
         self.RawAnalysis.setWidget(self.scrollAreaWidgetContents_2)
 
         self.verticalLayout_3.addWidget(self.RawAnalysis)
@@ -353,7 +363,7 @@ class Ui_Main(object):
         self.actionTheme.setText(QCoreApplication.translate("Main", u"Theme", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("Main", u"Tab 2", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("Main", u"Tab 1", None))
-        self.PathToTheFileLabel.setText(QCoreApplication.translate("Main", u"Path to the file", None))
+        self.PathToTheFileLine.setPlaceholderText(QCoreApplication.translate("Main", u"Path to the file", None))
         self.FileBrowser.setText(QCoreApplication.translate("Main", u"File browser", None))
         self.analizeButton.setText(QCoreApplication.translate("Main", u"Analize", None))
         self.errorButton.setText(QCoreApplication.translate("Main", u"Errors", None))
