@@ -1,0 +1,15 @@
+import pathlib as pl
+import os
+
+class PathHandler():
+    def __init__(self, folder_path):
+        self.path = pl.Path(folder_path)
+
+    def get_pdb_files(self):
+        return list(self.path.glob('**/*.pdb'))
+    
+if __name__ == "__main__":
+    handler = PathHandler(r'C:\Users\Damian\PycharmProjects\Inter_pred\sample_data')
+    pdb_files = handler.get_pdb_files()
+    for pdb_file in pdb_files:
+        print(pdb_file.absolute)

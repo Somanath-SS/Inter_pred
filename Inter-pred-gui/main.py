@@ -6,6 +6,7 @@ from PySide6.QtCore import Qt, QPoint
 from draggable_window import DraggableWindow
 from title_window_functions import title_window_style
 from menu_functions import style_menu
+from tabs_functionality import TabHandler
 
 from ui_form import Ui_Main
 
@@ -14,11 +15,23 @@ class Main(QMainWindow):
         super().__init__(parent)
         self.ui = Ui_Main()
         self.ui.setupUi(self)
+
         # set the style sheet main window theme
         title_window_style(self)
-        # menu bar 
+
+        # handle functionality of menu bar 
         menu_bar = self.menuBar() 
         style_menu(menu_bar)
+        
+
+        # handle functionality of tab widget
+        self.tab_handler = TabHandler(self.ui.tabWidget)
+
+        
+    
+    
+
+
 
 
 if __name__ == "__main__":
