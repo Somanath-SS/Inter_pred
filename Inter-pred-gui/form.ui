@@ -397,7 +397,8 @@
               </property>
               <property name="font">
                <font>
-                <family>Cascadia Mono ExtraLight</family>
+                <family>Cascadia Code</family>
+                <bold>false</bold>
                </font>
               </property>
               <property name="styleSheet">
@@ -451,6 +452,7 @@
                <font>
                 <family>Cascadia Code</family>
                 <pointsize>-1</pointsize>
+                <bold>false</bold>
                </font>
               </property>
               <property name="autoFillBackground">
@@ -478,9 +480,9 @@
              <widget class="QPushButton" name="FileBrowser">
               <property name="font">
                <font>
-                <family>Cascadia Code SemiBold</family>
+                <family>Cascadia Code</family>
                 <pointsize>-1</pointsize>
-                <bold>true</bold>
+                <bold>false</bold>
                </font>
               </property>
               <property name="cursor">
@@ -511,9 +513,9 @@
              <widget class="QPushButton" name="analizeButton">
               <property name="font">
                <font>
-                <family>Cascadia Code SemiBold</family>
+                <family>Cascadia Code</family>
                 <pointsize>-1</pointsize>
-                <bold>true</bold>
+                <bold>false</bold>
                </font>
               </property>
               <property name="styleSheet">
@@ -541,9 +543,9 @@
              <widget class="QPushButton" name="errorButton">
               <property name="font">
                <font>
-                <family>Cascadia Mono SemiBold</family>
+                <family>Cascadia Code</family>
                 <pointsize>-1</pointsize>
-                <bold>true</bold>
+                <bold>false</bold>
                </font>
               </property>
               <property name="autoFillBackground">

@@ -16,10 +16,10 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QIcon, QImage, QKeySequence, QLinearGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
-from PySide6.QtWidgets import (QApplication, QGraphicsView, QHBoxLayout, QLineEdit,
-    QMainWindow, QMenu, QMenuBar, QPushButton,
-    QScrollArea, QSizePolicy, QSplitter, QStatusBar,
-    QTabWidget, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QHBoxLayout, QLineEdit, QMainWindow,
+    QMenu, QMenuBar, QPushButton, QScrollArea,
+    QSizePolicy, QSplitter, QStatusBar, QTabWidget,
+    QVBoxLayout, QWidget)
 
 class Ui_Main(object):
     def setupUi(self, Main):
@@ -140,7 +140,8 @@ class Ui_Main(object):
         self.tabWidget.setObjectName(u"tabWidget")
         self.tabWidget.setEnabled(True)
         font = QFont()
-        font.setFamilies([u"Cascadia Mono ExtraLight"])
+        font.setFamilies([u"Cascadia Code"])
+        font.setBold(False)
         self.tabWidget.setFont(font)
         self.tabWidget.setStyleSheet(u"   QTabWidget::tab-bar {\n"
 "           alignment: left;\n"
@@ -163,9 +164,6 @@ class Ui_Main(object):
         self.tabWidget.setTabBarAutoHide(False)
         self.Starting = QWidget()
         self.Starting.setObjectName(u"Starting")
-        self.graphicsView = QGraphicsView(self.Starting)
-        self.graphicsView.setObjectName(u"graphicsView")
-        self.graphicsView.setGeometry(QRect(0, 0, 781, 361))
         self.tabWidget.addTab(self.Starting, "")
 
         self.verticalLayout.addWidget(self.tabWidget)
@@ -177,9 +175,7 @@ class Ui_Main(object):
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.PathToTheFileLine = QLineEdit(self.layoutWidget)
         self.PathToTheFileLine.setObjectName(u"PathToTheFileLine")
-        font1 = QFont()
-        font1.setFamilies([u"Cascadia Code"])
-        self.PathToTheFileLine.setFont(font1)
+        self.PathToTheFileLine.setFont(font)
         self.PathToTheFileLine.setAutoFillBackground(False)
         self.PathToTheFileLine.setStyleSheet(u"        QLineEdit {\n"
 "            background-color:  rgb(30, 30, 30); /* Light Gray */\n"
@@ -195,10 +191,7 @@ class Ui_Main(object):
 
         self.FileBrowser = QPushButton(self.layoutWidget)
         self.FileBrowser.setObjectName(u"FileBrowser")
-        font2 = QFont()
-        font2.setFamilies([u"Cascadia Code SemiBold"])
-        font2.setBold(True)
-        self.FileBrowser.setFont(font2)
+        self.FileBrowser.setFont(font)
         self.FileBrowser.setCursor(QCursor(Qt.ArrowCursor))
         self.FileBrowser.setStyleSheet(u"        QPushButton {\n"
 "            background-color: #rgb(30, 30, 30);\n"
@@ -219,7 +212,7 @@ class Ui_Main(object):
 
         self.analizeButton = QPushButton(self.layoutWidget)
         self.analizeButton.setObjectName(u"analizeButton")
-        self.analizeButton.setFont(font2)
+        self.analizeButton.setFont(font)
         self.analizeButton.setStyleSheet(u"        QPushButton {\n"
 "            background-color: #rgb(30, 30, 30);\n"
 "            color: white;\n"
@@ -239,10 +232,7 @@ class Ui_Main(object):
 
         self.errorButton = QPushButton(self.layoutWidget)
         self.errorButton.setObjectName(u"errorButton")
-        font3 = QFont()
-        font3.setFamilies([u"Cascadia Mono SemiBold"])
-        font3.setBold(True)
-        self.errorButton.setFont(font3)
+        self.errorButton.setFont(font)
         self.errorButton.setAutoFillBackground(False)
         self.errorButton.setStyleSheet(u"        QPushButton {\n"
 "            background-color: #rgb(30, 30, 30);\n"
@@ -276,6 +266,8 @@ class Ui_Main(object):
         self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.CodeView = QScrollArea(self.layoutWidget1)
         self.CodeView.setObjectName(u"CodeView")
+        font1 = QFont()
+        font1.setFamilies([u"Cascadia Code"])
         self.CodeView.setFont(font1)
         self.CodeView.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
