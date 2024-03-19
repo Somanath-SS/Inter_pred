@@ -16,10 +16,10 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QIcon, QImage, QKeySequence, QLinearGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
-from PySide6.QtWidgets import (QApplication, QHBoxLayout, QLineEdit, QMainWindow,
-    QMenu, QMenuBar, QPushButton, QScrollArea,
-    QSizePolicy, QSplitter, QStatusBar, QTabWidget,
-    QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QGraphicsView, QHBoxLayout, QLineEdit,
+    QMainWindow, QMenu, QMenuBar, QPushButton,
+    QScrollArea, QSizePolicy, QSplitter, QStatusBar,
+    QTabWidget, QVBoxLayout, QWidget)
 
 class Ui_Main(object):
     def setupUi(self, Main):
@@ -163,6 +163,9 @@ class Ui_Main(object):
         self.tabWidget.setTabBarAutoHide(False)
         self.Starting = QWidget()
         self.Starting.setObjectName(u"Starting")
+        self.graphicsView = QGraphicsView(self.Starting)
+        self.graphicsView.setObjectName(u"graphicsView")
+        self.graphicsView.setGeometry(QRect(0, 0, 781, 361))
         self.tabWidget.addTab(self.Starting, "")
 
         self.verticalLayout.addWidget(self.tabWidget)
@@ -339,7 +342,7 @@ class Ui_Main(object):
 
         self.retranslateUi(Main)
 
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(Main)

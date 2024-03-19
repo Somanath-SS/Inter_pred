@@ -23,12 +23,26 @@ class Main(QMainWindow):
         # handle functionality of menu bar 
         menu_bar = self.menuBar() 
         style_menu(menu_bar)
-        
-        # handle functionality of tab widget
-        self.tab_handler = TabHandler(self.ui.tabWidget)
 
         # File browsare button 
-        self.file_browser = FileBrowser(self.ui.FileBrowser, self.ui.PathToTheFileLine)
+
+        # handle functionality of tab widgest
+        self.tab_handler = TabHandler(self.ui.tabWidget)
+
+        self.file_browser = FileBrowser(
+            self.ui.FileBrowser, 
+            self.ui.PathToTheFileLine, 
+            self.tab_handler)
+        
+        all_files = self.file_browser.pdb_files
+        print(all_files)
+        
+        # add more tabs
+
+        # handle functionality of output window 
+
+        # handle functionality of raw data window
+
         
 
 if __name__ == "__main__":
