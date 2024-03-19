@@ -28,7 +28,7 @@ class Main(QMainWindow):
         self.tab_handler = TabHandler(self.ui.tabWidget)
 
         # File browsare button 
-        self.file_browser = FileBrowser(self.ui.FileBrowser)
+        self.file_browser = FileBrowser(self.ui.FileBrowser, self.ui.PathToTheFileLine)
         
 
 if __name__ == "__main__":

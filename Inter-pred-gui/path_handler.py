@@ -6,7 +6,8 @@ class PathHandler():
         self.path = pl.Path(folder_path)
 
     def get_pdb_files(self):
-        return list(self.path.glob('**/*.pdb'))
+        pdb_files = list(self.path.glob('**/*.pdb'))
+        return pdb_files, len(pdb_files)
     
 if __name__ == "__main__":
     handler = PathHandler(r'C:\Users\Damian\PycharmProjects\Inter_pred\sample_data')
