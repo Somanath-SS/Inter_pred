@@ -392,6 +392,9 @@
            <layout class="QVBoxLayout" name="verticalLayout">
             <item>
              <widget class="QTabWidget" name="tabWidget">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
               <property name="font">
                <font>
                 <family>Cascadia Mono ExtraLight</family>
@@ -431,14 +434,9 @@
               <property name="tabBarAutoHide">
                <bool>false</bool>
               </property>
-              <widget class="QWidget" name="tab_2">
+              <widget class="QWidget" name="Starting">
                <attribute name="title">
-                <string>Tab 2</string>
-               </attribute>
-              </widget>
-              <widget class="QWidget" name="tab">
-               <attribute name="title">
-                <string>Tab 1</string>
+                <string>Starting</string>
                </attribute>
               </widget>
              </widget>

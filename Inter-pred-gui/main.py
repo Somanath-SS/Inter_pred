@@ -7,8 +7,9 @@ from draggable_window import DraggableWindow
 from title_window_functions import title_window_style
 from menu_functions import style_menu
 from tabs_functionality import TabHandler
-
-from ui_form import Ui_Main
+from ui_form import Ui_Main 
+from PySide6.QtWidgets import QFileDialog
+from file_browser import FileBrowser
 
 class Main(QMainWindow):
     def __init__(self, parent=None):
@@ -23,16 +24,12 @@ class Main(QMainWindow):
         menu_bar = self.menuBar() 
         style_menu(menu_bar)
         
-
         # handle functionality of tab widget
         self.tab_handler = TabHandler(self.ui.tabWidget)
 
+        # File browsare button 
+        self.file_browser = FileBrowser(self.ui.FileBrowser)
         
-    
-    
-
-
-
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
