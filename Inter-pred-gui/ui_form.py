@@ -95,6 +95,8 @@ class Ui_Main(object):
         palette.setBrush(QPalette.Disabled, QPalette.Shadow, brush8)
         palette.setBrush(QPalette.Disabled, QPalette.Highlight, brush13)
         Main.setPalette(palette)
+        Main.setLocale(QLocale(QLocale.English, QLocale.UnitedStates))
+        Main.setDocumentMode(False)
         Main.setTabShape(QTabWidget.Rounded)
         self.actionSave = QAction(Main)
         self.actionSave.setObjectName(u"actionSave")
@@ -157,6 +159,7 @@ class Ui_Main(object):
 "        QTabBar::tab:selected {\n"
 "            color: rgb(0, 255, 0);              \n"
 "        }")
+        self.tabWidget.setLocale(QLocale(QLocale.English, QLocale.UnitedStates))
         self.tabWidget.setElideMode(Qt.ElideLeft)
         self.tabWidget.setDocumentMode(False)
         self.tabWidget.setTabsClosable(False)
@@ -205,7 +208,7 @@ class Ui_Main(object):
 "\n"
 "        }\n"
 "        QPushButton:hover {\n"
-"            border: 2px #282828;\n"
+"            border: 2px solid #DDDDDD;\n"
 "        }")
 
         self.horizontalLayout.addWidget(self.FileBrowser)
@@ -225,7 +228,7 @@ class Ui_Main(object):
 "\n"
 "        }\n"
 "        QPushButton:hover {\n"
-"            border: 2px #282828;\n"
+"            border: 2px solid #DDDDDD;\n"
 "        }")
 
         self.horizontalLayout.addWidget(self.analizeButton)
@@ -246,7 +249,7 @@ class Ui_Main(object):
 "\n"
 "        }\n"
 "        QPushButton:hover {\n"
-"            border: 2px #282828;\n"
+"            border: 2px solid #DDDDDD;\n"
 "        }")
         self.errorButton.setCheckable(False)
 

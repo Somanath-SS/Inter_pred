@@ -2,6 +2,15 @@ from PySide6.QtCore import QPoint, Qt, QEvent
 from PySide6.QtWidgets import QWidget, QMenuBar
 
 class DraggableWindow(QMenuBar):
+    """
+    This class is used to make the main window draggable
+
+    Args:
+        QMenuBar (QWidget): This class is used to make the main window draggable
+
+    Returns:
+        None: This class is used to make the main window draggable
+    """
     def __init__(self, parent=None):
         super().__init__(parent)
         self.moving = False

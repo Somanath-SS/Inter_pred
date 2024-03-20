@@ -374,6 +374,12 @@
   <property name="windowTitle">
    <string>Main</string>
   </property>
+  <property name="locale">
+   <locale language="English" country="UnitedStates"/>
+  </property>
+  <property name="documentMode">
+   <bool>false</bool>
+  </property>
   <property name="tabShape">
    <enum>QTabWidget::Rounded</enum>
   </property>
@@ -416,6 +422,9 @@
         QTabBar::tab:selected {
             color: rgb(0, 255, 0);              
         }</string>
+              </property>
+              <property name="locale">
+               <locale language="English" country="UnitedStates"/>
               </property>
               <property name="currentIndex">
                <number>0</number>
@@ -501,7 +510,7 @@
 
         }
         QPushButton:hover {
-            border: 2px #282828;
+            border: 2px solid #282828;
         }</string>
               </property>
               <property name="text">
