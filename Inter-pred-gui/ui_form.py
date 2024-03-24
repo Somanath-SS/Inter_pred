@@ -16,10 +16,10 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QIcon, QImage, QKeySequence, QLinearGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
-from PySide6.QtWidgets import (QApplication, QHBoxLayout, QLineEdit, QMainWindow,
-    QMenu, QMenuBar, QPushButton, QScrollArea,
-    QSizePolicy, QSplitter, QStatusBar, QTabWidget,
-    QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QHBoxLayout, QLayout, QLineEdit,
+    QMainWindow, QMenu, QMenuBar, QPushButton,
+    QScrollArea, QSizePolicy, QSplitter, QStatusBar,
+    QTabWidget, QVBoxLayout, QWidget)
 
 class Ui_Main(object):
     def setupUi(self, Main):
@@ -265,32 +265,36 @@ class Ui_Main(object):
         self.layoutWidget1 = QWidget(self.splitter)
         self.layoutWidget1.setObjectName(u"layoutWidget1")
         self.verticalLayout_3 = QVBoxLayout(self.layoutWidget1)
+        self.verticalLayout_3.setSpacing(6)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
-        self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
-        self.CodeView = QScrollArea(self.layoutWidget1)
-        self.CodeView.setObjectName(u"CodeView")
-        font1 = QFont()
-        font1.setFamilies([u"Cascadia Code"])
-        self.CodeView.setFont(font1)
-        self.CodeView.setWidgetResizable(True)
-        self.scrollAreaWidgetContents = QWidget()
-        self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 112, 219))
-        self.CodeView.setWidget(self.scrollAreaWidgetContents)
-
-        self.verticalLayout_3.addWidget(self.CodeView)
-
+        self.verticalLayout_3.setSizeConstraint(QLayout.SetDefaultConstraint)
+        self.verticalLayout_3.setContentsMargins(6, 6, 6, 5)
         self.RawAnalysis = QScrollArea(self.layoutWidget1)
         self.RawAnalysis.setObjectName(u"RawAnalysis")
+        font1 = QFont()
+        font1.setFamilies([u"Cascadia Code"])
         self.RawAnalysis.setFont(font1)
         self.RawAnalysis.setAutoFillBackground(False)
+        self.RawAnalysis.setStyleSheet(u"background-color: #17191B;")
         self.RawAnalysis.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 112, 218))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 108, 214))
         self.RawAnalysis.setWidget(self.scrollAreaWidgetContents_2)
 
         self.verticalLayout_3.addWidget(self.RawAnalysis)
+
+        self.CodeView = QScrollArea(self.layoutWidget1)
+        self.CodeView.setObjectName(u"CodeView")
+        self.CodeView.setFont(font1)
+        self.CodeView.setStyleSheet(u"background-color: #17191B;")
+        self.CodeView.setWidgetResizable(True)
+        self.scrollAreaWidgetContents = QWidget()
+        self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 108, 214))
+        self.CodeView.setWidget(self.scrollAreaWidgetContents)
+
+        self.verticalLayout_3.addWidget(self.CodeView)
 
         self.splitter.addWidget(self.layoutWidget1)
 
