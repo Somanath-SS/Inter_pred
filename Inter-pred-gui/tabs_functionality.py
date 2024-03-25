@@ -27,7 +27,9 @@ class TabHandler:
         Returns:
             None: This function does not return anything
         """
-        self.tab_widget.addTab(QWidget(), file_name)
+        tab = QWidget()
+        self.tab_widget.addTab(tab, file_name)
+        return tab
 
     def close_tab(self, index):
         """

@@ -41,7 +41,8 @@ def parse_pdb(file_path):
                 if chain not in amino_acids:
                     amino_acids[chain] = {}
 
-                amino_acids[chain][residue_number] = residue_name
+                amino_acids[chain][residue_number] =  \
+                    residue_name
 
                 protein_atoms.append(
                     (
@@ -142,117 +143,103 @@ def find_hydrogen_bonds(sorted_distances):
 
     return hydrogen_bonds
 
-def visualize_ligand_sticks_with_labels(
+def getValueToJson(
     ligand_atoms,
     hydrogen_bonds,
     protein_atoms,
     amino_acids
     ):
-    """_summary_
+    json_data = {}
+    json_data["ligand_atoms"] = ligand_atoms
+    json_data["hydrogen_bonds"] = hydrogen_bonds
+    json_data["protein_atoms"] = protein_atoms
+    json_data["amino_acids"] = amino_acids
+    return json_data
 
-    Args:
-        ligand_atoms (_type_): _description_
-        hydrogen_bonds (_type_): _description_
-        protein_atoms (_type_): _description_
-        amino_acids (_type_): _description_
-    Returns:
-        _type_: _description_
-    """
+def visualize_ligand_sticks_with_labels(ligand_atoms,
+                                        hydrogen_bonds,
+                                        protein_atoms,
+                                        amino_acids,
+                                        ):
     # Create a Py3Dmol view
     view = py3Dmol.view(width=800, height=600)
 
     # Create a PDB file string for ligand atoms
-    ligand_pdb_string = ""
+    pdb_string = ""
     for i, (atom_type, x, y, z) in enumerate(ligand_atoms):
-        ligand_pdb_string += (
-        f"ATOM  {i+1:<5} {atom_type:<4} LIG     1    "
-        f"{x:>8.3f}{y:>8.3f}{z:>8.3f}\n"
-                                )
-    # Add ligand atoms to the view
-    view.addModel(ligand_pdb_string, "pdb")
+        pdb_string += f"ATOM  {i+1:<5} {atom_type:<4} MOL     1    {x:>8.3f}{y:>8.3f}{z:>8.3f}\n"
+
+    # Add ligand atoms from the PDB file string
+    view.addModel(pdb_string, "pdb")
 
     # Set style to stick representation for ligand atoms
-    view.setStyle({'model': 0}, {'stick': {}})
+    view.setStyle({'stick': {}})
 
     # Add labels to ligand atoms
     for i, (atom_type, x, y, z) in enumerate(ligand_atoms):
         view.addLabel(atom_type, {'position': {'x': x, 'y': y, 'z': z}})
 
-    # Create a PDB file string for protein atoms
-    protein_pdb_string = ""
-    for i, (atom_type, x, y, z, chain, residue_number) \
-        in enumerate(protein_atoms):
-        protein_pdb_string += (
-            f"ATOM  {i+1:<5} {atom_type:<4} PRO     1"
-            f"{x:>8.3f}{y:>8.3f}{z:>8.3f}\n"
-                               )
+    # Add light blue spheres for hydrogen atoms
+    hydrogen_atoms = [atom for atom in ligand_atoms if atom[0].startswith('H')]
+    for i, (atom_type, x, y, z) in enumerate(hydrogen_atoms):
+        view.addSphere({'center': {'x': x, 'y': y, 'z': z}, 'radius': 0.3, 'color': 'lightblue'})
 
-    # Add protein atoms to the view
-    view.addModel(protein_pdb_string, "pdb")
-
-    # Set style to sphere representation for protein atoms
-    view.setStyle({'model': 1}, {'sphere': {'color': 'red'}})
-
-    # Add labels to protein atoms
-    for chain, residue_number, _, _, _ in hydrogen_bonds:
-        amino_acid = amino_acids.get(chain, {}).get(
-            residue_number, "Unknown"
-            )
+     # Add protein atoms as red spheres and label them
+    for chain, residue_number, protein_atom_type, ligand_atom_type, dist in hydrogen_bonds:
+        amino_acid = amino_acids.get(chain, {}).get(residue_number, "Unknown")
         # Find the coordinates of the protein atom involved in the hydrogen bond
-        protein_atom_coords = next(
-            (x, y, z) for _, x, y, z, ch, rn  \
-                in protein_atoms if ch == chain and rn == residue_number
-                )
+        protein_atom_coords = next((x, y, z) for _, x, y, z, ch, rn in protein_atoms if ch == chain and rn == residue_number)
+        # Add red sphere for the protein atom
+        view.addSphere({'center': {'x': protein_atom_coords[0], 'y': protein_atom_coords[1], 'z': protein_atom_coords[2]}, 'radius': 0.3, 'color': 'red'})
         # Label the protein atom with amino acid and residue number
         label_text = f"{amino_acid} {residue_number}({chain})"
-        view.addLabel(
-            label_text, {
-                          'position': 
-                              {
-                              'x': protein_atom_coords[0],
-                              'y': protein_atom_coords[1],
-                              'z': protein_atom_coords[2]
-                              }
-                          }
-                      )
-
-        # Find the ligand atom coordinates involved in the hydrogen bond
+        view.addLabel(label_text, {'position': {'x': protein_atom_coords[0], 'y': protein_atom_coords[1], 'z': protein_atom_coords[2]}})
+         
+    # Add yellow dotted lines between ligand atoms involved in hydrogen bonds
+    for chain, residue_number, protein_atom_type, ligand_atom_type, dist in hydrogen_bonds:
+        # Find the coordinates of the ligand atom involved in the hydrogen bond
         ligand_atom_coords = None
-        for _, x, y, z in ligand_atoms:
-            if _ == "N1" or _ == "O2":
-                ligand_atom_coords = (x, y, z)
+        for atom in ligand_atoms:
+            if atom[0] == ligand_atom_type:
+                ligand_atom_coords = atom[1:4]
                 break
+        if ligand_atom_coords:
+            # Find the coordinates of the protein atom involved in the hydrogen bond
+            protein_atom_coords = None
+            for _, x, y, z, ch, rn in protein_atoms:
+                if ch == chain and rn == residue_number:
+                    protein_atom_coords = (x, y, z)
+                    break
+            if protein_atom_coords:
+                # Add yellow dotted line between ligand atom and protein atom
+        
+               # Define the number of segments for the line
+                num_segments = 10
+                
+                # Calculate the length of each segment
+                segment_length = dist / num_segments
+                
+                # Add yellow dotted line between ligand atom and protein atom with increased thickness using cylinder shape
+                for i in range(num_segments):
+                    start_pos = {'x': ligand_atom_coords[0] + (protein_atom_coords[0] - ligand_atom_coords[0]) * i / num_segments,
+                                 'y': ligand_atom_coords[1] + (protein_atom_coords[1] - ligand_atom_coords[1]) * i / num_segments,
+                                 'z': ligand_atom_coords[2] + (protein_atom_coords[2] - ligand_atom_coords[2]) * i / num_segments}
+                    end_pos = {'x': ligand_atom_coords[0] + (protein_atom_coords[0] - ligand_atom_coords[0]) * (i + 0.5) / num_segments,
+                               'y': ligand_atom_coords[1] + (protein_atom_coords[1] - ligand_atom_coords[1]) * (i + 0.5) / num_segments,
+                               'z': ligand_atom_coords[2] + (protein_atom_coords[2] - ligand_atom_coords[2]) * (i + 0.5) / num_segments}
+                    view.addCylinder({'start': start_pos, 'end': end_pos, 'radius': 0.07, 'color': 'yellow'})
 
-        # Connect protein atom to ligand with yellow dotted line
-        view.addLine(
-                        {
-                        'start': {
-                            'x': protein_atom_coords[0],
-                            'y': protein_atom_coords[1],
-                            'z': protein_atom_coords[2]
-                                },
-                        'end': {
-                            'x': ligand_atom_coords[0],
-                            'y': ligand_atom_coords[1],
-                            'z': ligand_atom_coords[2]
-                                },
-                        'color': 'yellow', 
-                        'dashed': True
-                        }
-                    )
 
     # Set background color to black
     view.setBackgroundColor('black')
 
     # Zoom to fit the structure
     view.zoomTo()
-
-    # Show the 3D view
-    view.show()
-
+    
+    return view
 
 if __name__ == "__main__":
-    protein_atoms, ligand_atoms, amino_acids = parse_pdb(r"..\sample_data\first.pdb")
+    protein_atoms, ligand_atoms, amino_acids = parse_pdb(r"C:\Users\damia\OneDrive\Pulpit\Inter_pred\Inter_pred\sample_data\first.pdb")
     distances = calculate_distances(protein_atoms, ligand_atoms)
     sorted_distances = sort_distances(distances)
     hydrogen_bonds = find_hydrogen_bonds(sorted_distances)
@@ -271,10 +258,4 @@ if __name__ == "__main__":
     else:
         print("\nNo possible Hydrogen Bond Interactions found.")
         
-    visualize_ligand_sticks_with_labels(
-        ligand_atoms,
-        hydrogen_bonds,
-        protein_atoms,
-        amino_acids
-        )
 

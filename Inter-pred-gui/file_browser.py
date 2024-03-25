@@ -29,6 +29,7 @@ class FileBrowser:
         self.button.clicked.connect(self.open_file_dialog)
         self.pdb_files = []
         self.tab_handler = tab_handler
+        self.tabs = []
 
     def open_file_dialog(self):
         """
@@ -81,7 +82,7 @@ class FileBrowser:
             font-size: 11px;
             color: {color}
             }}""")
-        self.add_more_tabs(self.pdb_files, self.tab_handler)
+        self.tabs = self.add_more_tabs(self.pdb_files, self.tab_handler)
         
     def add_more_tabs(self, all_files: PathHandler, tab_handler: TabHandler):
         """
@@ -97,8 +98,15 @@ class FileBrowser:
         Raises:
             None: This function does not raise any exceptions
         """
+        tabs = {}
         for file in all_files:
-            tab_handler.add_new_tab(file.name)
+            tab = tab_handler.add_new_tab(file.name)
+            tabs[file.name] = {
+                'tab': tab,
+                'file': file,
+                # Add any other information you need here
+            }
+        return tabs
 
 
 
